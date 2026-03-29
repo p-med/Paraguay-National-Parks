@@ -13,6 +13,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 
   /* Upper atmosphere on a sunny day at noon */
   background: linear-gradient(
@@ -54,8 +55,11 @@ body {
     padding-bottom: 0;
     letter-spacing: 50px;
     text-indent: 50px; /* Match your letter-spacing value */
-    margin-bottom: -5px;
+    /* margin-bottom: -5px; */
     font-size: 2rem;
+    z-index: 2;
+    height: 50%;
+    margin-bottom: -25%;
 }
 
 .title {
@@ -72,40 +76,37 @@ body {
   font-weight: 600;
   letter-spacing: -0.02em;
   margin-top: 0;
+  height: 50%;
 }
 
 .title-container {
   margin: 30%;
-  z-index: 2;
   padding-bottom: 50px;
   align-items: center;
 }
 
 .cloud-1 {
-    position: absolute;
-    width: 700%;
-    animation: moveBackground 10s linear infinite;
-    z-index: 3;
+  position: absolute;
+  /* top: -10%;      Position it in the sky */
+  width: 1500%;  /* Adjust size as needed */
+  z-index: 3;
+  
+  /* Apply the animation */
+  animation: driftClouds 150s linear infinite;
 }
 
-.cloud-2 {
-    position: absolute;
-    width: 900px;
-    animation: moveBackground 500s linear infinite;
-}
-
-@keyframes moveBackground {
+@keyframes driftClouds {
   0% {
-    background-position: 0 0; /* Start position */
+    transform: translateX(20%); /* Start completely off-screen to the left */
   }
   100% {
-    background-position: 100% 0; /* End position (moves the width of the container/image) */
+    transform: translateX(1vw); /* End completely off-screen to the right */
   }
 }
 
 .skyline {
     position: absolute;
-    top: 1%;
+    top: -3%;
     width: 100%;
     z-index: 5;
 }
@@ -139,62 +140,26 @@ body {
   }
 }
 
-@media (max-width: 850px) {
+@media (max-height: 950px) {
+  .skyline {
+    top: -1%;
+  }
   .title {
-    font-size: 3rem;
-    text-align: center;
-  }
-  
-  .deer-hero-image {
-    width: 50vw;
-    left: -10%;
-    bottom: -5%;
-  }
-  
-  .karayas-hero-image {
-    width: 120vw;
-    right: -10%;
-    top: -45%;
-    display: none;
-  }
-  
-  .karaya-hero-image {
-    width: 80vw;
-    right: 3%;
-    bottom: 55%;
+    height: 60%
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 890px) {
   .title {
-    font-size: 2.5rem;
-    text-align: center;
-    padding: 0 20px;
+    font-size: 2.5rem;;
   }
-  
-  .deer-hero-image {
-    width: 50vw;
-    left: -10%;
-    bottom: -5%;
+  .over-title {
+    font-size: 1rem;
+    letter-spacing: 25px;
+    text-indent: 25px; /* Match your letter-spacing value */
+    margin-bottom: -95%;
   }
-  
-  .karayas-hero-image {
-    display: none;
-  }
-  
-  .karaya-hero-image {
-    width: 80vw;
-    right: 3%;
-    bottom: 60%;
-  }
-  
-  .vulture-image {
-    width: 40vw;
-    min-width: 200px;
-  }
-  
-  .paj-campana {
-    width: 35vw;
-    min-width: 200px;
+  .skyline {
+    top: 60%;
   }
 }

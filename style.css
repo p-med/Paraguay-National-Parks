@@ -1,115 +1,200 @@
 body {
-    background-color: #213224;
-    height: 100%;
-    margin: 0;
+  background-color: #87ceeb;
+  height: 100%;
+  margin: 0;
 }
 
 /* Hero section */
 
 .hero {
-    position: relative; /* Needed so the image stays inside this container */
-    height: 100vh;
-    overflow: hidden;   /* Keeps the deer from causing a horizontal scrollbar */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #f2eee4;
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* Upper atmosphere on a sunny day at noon */
+  background: linear-gradient(
+    to bottom,
+    #87ceeb 0%,     /* Bright noon sky blue */
+    #a8d8f0 20%,    /* Light sky */
+    #c2e3f6 40%,    /* Pale sky */
+    #d4ebf7 60%,    /* High atmosphere fade */
+    #e3f2f8 80%,    /* Very light sky */
+    #f0f6fa 100%    /* Almost white horizon */
+  );
+}
+
+/* Subtle clouds in the noon sky */
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0; 
+  left: 0;
+  width: 100%; 
+  height: 70%; 
+  opacity: 0.12;
+  pointer-events: none;
+  background-image: 
+    radial-gradient(ellipse at 20% 20%, rgba(255, 255, 255, 0.6) 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 30%, rgba(255, 255, 255, 0.5) 0%, transparent 55%),
+    radial-gradient(ellipse at 45% 45%, rgba(255, 255, 255, 0.4) 0%, transparent 45%),
+    radial-gradient(ellipse at 85% 25%, rgba(255, 255, 255, 0.45) 0%, transparent 48%);
+}
+
+/* No forest texture needed - we're in the sky */
+
+.over-title {
+    font-family: "Fira Sans", sans-serif;
+    font-weight: 600;
+    text-align: center;
+    margin: auto;
+    color: #47658a;
+    padding-bottom: 0;
+    letter-spacing: 50px;
+    text-indent: 50px; /* Match your letter-spacing value */
+    margin-bottom: -5px;
+    font-size: 2rem;
 }
 
 .title {
-    font-family: "Ibarra Real Nova", serif;
-    font-size: 5rem;
-    color: #794632;
-    z-index: 2; /* Ensures text stays above the deer if they overlap */
+  padding-top: 0;
+  font-family: "Ibarra Real Nova", serif;
+  font-size: 6rem;
+  color: #47658a;
+  /* text-shadow: 
+    0 2px 8px rgba(0, 0, 0, 0.3),
+    0 4px 16px rgba(0, 0, 0, 0.2),
+    0 1px 3px rgba(0, 0, 0, 0.4); */
+  z-index: 4;
+  text-align: center;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin-top: 0;
 }
 
-.deer-hero-image {
+.title-container {
+  margin: 30%;
+  z-index: 2;
+  padding-bottom: 50px;
+  align-items: center;
+}
+
+.cloud-1 {
     position: absolute;
-    /* Position using percentages so it stays relative to the edge */
-    bottom: -5%;
-    left: -5%; 
-    
-    /* Use vw so the deer scales WITH the screen size */
-    width: 40vw; 
-    min-width: 300px; /* Prevents it from getting too tiny on mobile */
-    
-    transform: rotate(15deg);
-    opacity: 0.8;
-    pointer-events: none;
+    width: 700%;
+    animation: moveBackground 10s linear infinite;
+    z-index: 3;
 }
 
-/* The Monkey Group - Bottom Center */
-.karayas-hero-image {
+.cloud-2 {
     position: absolute;
-    bottom: -10%;
-    left: 50%;
-    width: 50vw;
-    min-width: 350px;
-    
-    /* Center it horizontally, then sink it vertically */
-    /* translateY(40%) keeps them "peeking" from the bottom edge */
-    transform: translate(-50%, 40%); 
-    
-    opacity: 0.9;
-    z-index: 3; 
-    pointer-events: none;
+    width: 900px;
+    animation: moveBackground 500s linear infinite;
 }
 
-/* The Single Monkey on a Tree - Bottom Right */
-.karaya-hero-image {
+@keyframes moveBackground {
+  0% {
+    background-position: 0 0; /* Start position */
+  }
+  100% {
+    background-position: 100% 0; /* End position (moves the width of the container/image) */
+  }
+}
+
+.skyline {
     position: absolute;
-    bottom: 35%;
-    right: -5%;
-    width: 40vw;
-    min-width: 250px;
-    
-    /* Sink the tree into the bottom right corner */
-    /* Adjust the 20% values to hide more or less of the tree */
-    transform: translate(15%, 20%) rotate(-10deg);
-    
-    opacity: 0.7; /* Keeping it "less visible" as requested */
-    z-index: 1;
-    pointer-events: none;
+    top: 1%;
+    width: 100%;
+    z-index: 5;
 }
 
+/* Transition */
+
+.highest-altitude {
+  position: relative;
+  min-height: 100vh;
+  background: linear-gradient(
+    to bottom,
+    #e3f2f8 0%,     /* Picks up from skyline */
+    #c8e4f3 50%,    
+    #afd9ed 100%    
+  );
+}
+/* Animations */
 @keyframes drift {
-    0% {
-        transform: scale(1) translate(0, 0);
-    }
-    100% {
-        transform: scale(1.1) translate(2%, 3%);
-    }
+  0% {
+    transform: scale(1) translate(0, 0);
+  }
+  100% {
+    transform: scale(1.1) translate(2%, 3%);
+  }
 }
 
+/* Responsive Design */
 @media (min-width: 1800px) {
-    .deer-hero-image {
-        width: 700px; /* Lock the size for ultra-wide screens */
-    }
+  .deer-hero-image {
+    width: 700px;
+  }
+}
+
+@media (max-width: 850px) {
+  .title {
+    font-size: 3rem;
+    text-align: center;
+  }
+  
+  .deer-hero-image {
+    width: 50vw;
+    left: -10%;
+    bottom: -5%;
+  }
+  
+  .karayas-hero-image {
+    width: 120vw;
+    right: -10%;
+    top: -45%;
+    display: none;
+  }
+  
+  .karaya-hero-image {
+    width: 80vw;
+    right: 3%;
+    bottom: 55%;
+  }
 }
 
 @media (max-width: 768px) {
-    .deer-hero-image {
-        width: 50vw;  /* Make it bigger relative to the small screen */
-        left: -10%;   /* Push it further off-screen so it's less distracting */
-        bottom: 0;
-    }
-    .karayas-hero-image {
-        width: 120vw;  /* Make it bigger relative to the small screen */
-        right: -10%;   /* Push it further off-screen so it's less distracting */
-        top: -45%;
-    }
-    .karaya-hero-image {
-        width: 40vw;
-        right: 20%;
-        bottom: -20%;
-    }
-    .title {
-        font-size: 3rem; /* Shrink text so it fits between the animals */
-    }
-}
-
-.karayas-hero-image {
-    /* Fades the bottom of the SVG into the background color */
-    mask-image: linear-gradient(to top, transparent 0%, black 30%);
-    -webkit-mask-image: linear-gradient(to top, transparent 0%, black 30%);
+  .title {
+    font-size: 2.5rem;
+    text-align: center;
+    padding: 0 20px;
+  }
+  
+  .deer-hero-image {
+    width: 50vw;
+    left: -10%;
+    bottom: -5%;
+  }
+  
+  .karayas-hero-image {
+    display: none;
+  }
+  
+  .karaya-hero-image {
+    width: 80vw;
+    right: 3%;
+    bottom: 60%;
+  }
+  
+  .vulture-image {
+    width: 40vw;
+    min-width: 200px;
+  }
+  
+  .paj-campana {
+    width: 35vw;
+    min-width: 200px;
+  }
 }
